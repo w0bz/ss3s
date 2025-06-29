@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slikker som en Schæfer - CS2 Holdet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="header-bg text-white py-4 sm:py-6 shadow-lg rounded-b-lg">
+        <div class="container mx-auto px-4 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <img src="ss3s_logo.jpg" alt="Slikker som en Schæfer Logo" class="rounded-full w-10 h-10 sm:w-12 sm:h-12 object-cover">
+                <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight">
+                    Slikker som en <span class="accent-text">Schæfer</span>
+                </h1>
+            </div>
+            <nav class="hidden md:block space-x-6">
+                <a href="#spillere-section" class="nav-link" data-section="spillere-section">Schæferne</a>
+                <a href="#kampe-section" class="nav-link" data-section="kampe-section">Kampe</a>
+                <a href="#territory-section" class="nav-link" data-section="territory-section">Territorium</a>
+                <a href="#mvp-section" class="nav-link" data-section="mvp-section">Sæson MVP</a>
+                <a href="#highlights-section" class="nav-link" data-section="highlights-section">Highlights</a>
+                <a href="#pokalskab-section" class="nav-link" data-section="pokalskab-section">Pokalskabet</a>
+            </nav>
+            <div id="hamburger-icon" class="hamburger-icon md:hidden">☰</div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 min-h-screen">
+        <section id="spillere-section" class="content-section"><h3 class="text-3xl sm:text-4xl font-semibold text-gray-100 text-center mb-8">Schæferne</h3><div id="team-summary-stats" class="team-summary-container mb-12"></div><div id="interactive-player-grid" class="interactive-player-grid"></div></section>
+        <section id="kampe-section" class="content-section"><h3 class="text-3xl sm:text-4xl font-semibold text-gray-100 text-center mb-8">Kampe</h3><div class="flex flex-col md:flex-row gap-8 max-w-4xl mx-auto"><div class="md:w-1/2 w-full"><h4 class="text-2xl font-bold mb-4">Kommende Kampe</h4><div id="upcoming-matches" class="space-y-4"></div></div><div class="md:w-1/2 w-full"><h4 class="text-2xl font-bold mb-4">Resultater</h4><div id="match-results" class="space-y-4"></div></div></div></section>
+        <section id="territory-section" class="content-section"><h3 class="text-3xl sm:text-4xl font-semibold text-gray-100 text-center mb-8">Territorium</h3><div class="stats-explanation-container mb-8 max-w-4xl mx-auto"><p class="stats-explanation-text">Her kan du se, hvem der dominerer på de forskellige baner. <strong>Ratingen</strong> er en HLTV-lignende score beregnet ud fra Kills Per Round, Deaths Per Round og Average Damage per Round for hver spiller.</p></div><div id="territory-content" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div></section>
+        <section id="mvp-section" class="content-section"><h3 class="text-3xl sm:text-4xl font-semibold text-gray-100 text-center mb-8">Sæson MVP</h3><div id="mvp-content" class="flex flex-col lg:flex-row gap-8 items-start justify-center"></div></section>
+        <section id="highlights-section" class="content-section text-center py-12">
+			<div class="content-box max-w-3xl mx-auto">
+    			<h3 class="text-3xl sm:text-4xl font-semibold text-gray-100 mb-8">Kamp POV</h3>
+    			<p class="text-gray-300 max-w-2xl mx-auto mb-6">
+        			Se vores kampe fra spillernes synsvinkel. Playlisten indeholder alle kills fra vores POV, i kronologisk rækkefølge.
+    			</p>
+    			<a href="https://www.youtube.com/playlist?list=PLt0j-H80I2JdsuDo1xrdRGF3nBsIOdbZX" target="_blank" class="stylish-button">Se Playlist</a>
+			</div>
+          <h4 class="text-3xl sm:text-4xl font-semibold text-gray-100 mt-16 mb-8">Sjove Øjeblikke</h4>
+    		<div id="main-video-player-container" class="mb-8" style="display: none;">
+        		<div class="aspect-w-16 aspect-h-9 relative" style="padding-top: 56.25%;">
+           			<iframe id="main-video-player" class="absolute top-0 left-0 w-full h-full rounded-lg border-2 border-gray-600" src="" title="Sjovt Øjeblik" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        		</div>
+    		</div>
+			<div id="funny-moments-container" class="funny-moments-scroller"></div>
+        </section>
+        <section id="pokalskab-section" class="content-section text-center py-12">
+            <!-- Pokalskab content here -->
+        </section>
+    </main>
+    
+    <div id="player-modal" class="player-modal-overlay"><div class="player-modal-content"><button id="modal-close-btn" class="modal-close-btn">&times;</button><div id="modal-content-area"></div></div></div>
+    <div id="match-modal" class="match-modal-overlay"><div class="match-modal-content"><button id="match-modal-close-btn" class="modal-close-btn">&times;</button><div id="match-modal-header-container"></div><div id="match-modal-view-switcher" class="view-switcher"></div><div id="scoreboard-view" class="match-modal-view active"></div><div id="advanced-stats-view" class="match-modal-view"></div><div id="heatmap-view" class="match-modal-view"></div></div></div>
+    <div id="overlay-menu" class="overlay-menu"><nav class="flex flex-col items-center"><a href="#spillere-section" class="nav-link" data-section="spillere-section">Schæferne</a><a href="#kampe-section" class="nav-link" data-section="kampe-section">Kampe</a><a href="#territory-section" class="nav-link" data-section="territory-section">Territorium</a><a href="#mvp-section" class="nav-link" data-section="mvp-section">Sæson MVP</a><a href="#highlights-section" class="nav-link" data-section="highlights-section">Highlights</a><a href="#pokalskab-section" class="nav-link" data-section="pokalskab-section">Pokalskabet</a></nav></div>
+
+    <footer class="header-bg text-white py-6 mt-8 text-center rounded-t-lg"><p>© 2025 Slikker som en Schæfer. Alle rettigheder forbeholdes.</p></footer>
+
+    <script src="js/heatmap-config.js" defer></script>
+    <script src="js/navigation.js" defer></script>
+    <script src="js/players.js" defer></script>
+    <script src="js/matches.js" defer></script>
+    <script src="js/mvp.js" defer></script>
+    <script src="js/highlights.js" defer></script>
+    <script src="js/territory.js" defer></script>
+	<script src="script.js" defer></script>
+</body>
+</html>
